@@ -1,0 +1,1212 @@
+Last login: Fri Dec 17 16:49:11 on ttys000
+➜  ~ ls
+Academics                 Downloads                 Personal                  libDataHandler.dylib
+Adafruit_Sensor-master    Fritzing                  Pictures                  libGanglionLib.dylib
+Applications              InternetProjects          Playground                libMLModule.dylib
+Creative Cloud Files      Library                   Public                    libneurosdk-shared.dylib
+CytonBoard                LoRaNow-master            PycharmProjects           mne_data
+DHT-sensor-library-master Mbed Programs             Qt                        scikit_learn_data
+Desktop                   Movies                    WebProjects
+Developer                 Music                     brainflow_svm.model
+Documents                 OpenBCI_GUI               libBoardController.dylib
+➜  ~ cd Playground 
+➜  Playground ls
+Dataviz                  caesar_cipher.py         fibonacci_recursion.py   reverse_cipher.py
+ExternalWeb              cipher.txt               globus_notes.txt         test_args.py
+TwoSums.py               classnotes.txt           hacking_caesar.py        test_getopt.py
+__pycache__              decrypt_caesar.py        index.js                 tf_playground
+ayo_decrypt.py           enumerations.py          mergesort.py
+ayo_encrypt.py           esptool                  quicksort.py
+binary_search.py         fibonacci_complicated.py randomlist.py
+➜  Playground cd Dataviz 
+➜  Dataviz ls
+➜  Dataviz ls
+➜  Dataviz git clone https://github.com/stefmolin/Hands-On-Data-Analysis-with-Pandas.git handsOnDataAnalysis
+Cloning into 'handsOnDataAnalysis'...
+remote: Enumerating objects: 1294, done.
+remote: Counting objects: 100% (34/34), done.
+remote: Compressing objects: 100% (30/30), done.
+remote: Total 1294 (delta 13), reused 10 (delta 3), pack-reused 1260
+Receiving objects: 100% (1294/1294), 32.47 MiB | 10.11 MiB/s, done.
+Resolving deltas: 100% (746/746), done.
+➜  Dataviz ls
+handsOnDataAnalysis
+➜  Dataviz cd handsOnDataAnalysis 
+➜  handsOnDataAnalysis git:(master) ls
+LICENSE             appendix            ch_04               ch_08               ch_12
+README.md           ch_01               ch_05               ch_09               requirements.txt
+_img                ch_02               ch_06               ch_10               solutions
+acknowledgements.md ch_03               ch_07               ch_11
+➜  handsOnDataAnalysis git:(master) cd ch_02
+➜  ch_02 git:(master) ls
+1-pandas_data_structures.ipynb              5-selection.ipynb
+2-creating_dataframes.ipynb                 6-adding_and_removing_data.ipynb
+3-making_dataframes_from_api_requests.ipynb data
+4-inspecting_dataframes.ipynb
+➜  ch_02 git:(master) cd data
+➜  data git:(master) ls
+earthquakes.csv  example_data.csv parsed.csv       quakes.db        tsunamis.csv
+➜  data git:(master) conda activate ml_env
+(ml_env) ➜  data git:(master) ls
+earthquakes.csv  example_data.csv parsed.csv       quakes.db        tsunamis.csv
+(ml_env) ➜  data git:(master) ipython
+Python 3.9.7 | packaged by conda-forge | (default, Sep 14 2021, 01:14:24) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.27.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: import numpy as np
+
+In [2]: data = np.genfromtxt(
+   ...: 'data/example_data.csv',
+   ...: delimiter=';',
+   ...: names='True',
+   ...: dtype=None,
+   ...: encoding='UTF'
+   ...: )
+---------------------------------------------------------------------------
+OSError                                   Traceback (most recent call last)
+<ipython-input-2-eedfb1e32fd6> in <module>
+----> 1 data = np.genfromtxt(
+      2 'data/example_data.csv',
+      3 delimiter=';',
+      4 names='True',
+      5 dtype=None,
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/numpy/lib/npyio.py in genfromtxt(fname, dtype, comments, delimiter, skip_header, skip_footer, converters, missing_values, filling_values, usecols, names, excludelist, deletechars, replace_space, autostrip, case_sensitive, defaultfmt, unpack, usemask, loose, invalid_raise, max_rows, encoding, like)
+   1791             fname = os_fspath(fname)
+   1792         if isinstance(fname, str):
+-> 1793             fid = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+   1794             fid_ctx = contextlib.closing(fid)
+   1795         else:
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/numpy/lib/_datasource.py in open(path, mode, destpath, encoding, newline)
+    191 
+    192     ds = DataSource(destpath)
+--> 193     return ds.open(path, mode, encoding=encoding, newline=newline)
+    194 
+    195 
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/numpy/lib/_datasource.py in open(self, path, mode, encoding, newline)
+    531                                       encoding=encoding, newline=newline)
+    532         else:
+--> 533             raise IOError("%s not found." % path)
+    534 
+    535 
+
+OSError: data/example_data.csv not found.
+
+In [3]: data = np.genfromtxt(
+   ...: 'example_data.csv',
+   ...: delimiter=';',
+   ...: names='True',
+   ...: dtype=None,
+   ...: encoding='UTF'
+   ...: )
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-3-1c47f0a08748> in <module>
+----> 1 data = np.genfromtxt(
+      2 'example_data.csv',
+      3 delimiter=';',
+      4 names='True',
+      5 dtype=None,
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/numpy/lib/npyio.py in genfromtxt(fname, dtype, comments, delimiter, skip_header, skip_footer, converters, missing_values, filling_values, usecols, names, excludelist, deletechars, replace_space, autostrip, case_sensitive, defaultfmt, unpack, usemask, loose, invalid_raise, max_rows, encoding, like)
+   2199             ddtype = list(zip(names, sized_column_types))
+   2200             mdtype = list(zip(names, [bool] * len(sized_column_types)))
+-> 2201         output = np.array(data, dtype=ddtype)
+   2202         if usemask:
+   2203             outputmask = np.array(masks, dtype=mdtype)
+
+ValueError: could not assign tuple of length 6 to structure with 1 fields.
+
+In [4]: data = np.genfromtxt(
+   ...:     'example_data.csv',
+   ...:     delimiter=';',
+   ...:     names='True',
+   ...:     dtype=None,
+   ...:     encoding='UTF'
+   ...: )
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-4-359ae59694a0> in <module>
+----> 1 data = np.genfromtxt(
+      2     'example_data.csv',
+      3     delimiter=';',
+      4     names='True',
+      5     dtype=None,
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/numpy/lib/npyio.py in genfromtxt(fname, dtype, comments, delimiter, skip_header, skip_footer, converters, missing_values, filling_values, usecols, names, excludelist, deletechars, replace_space, autostrip, case_sensitive, defaultfmt, unpack, usemask, loose, invalid_raise, max_rows, encoding, like)
+   2199             ddtype = list(zip(names, sized_column_types))
+   2200             mdtype = list(zip(names, [bool] * len(sized_column_types)))
+-> 2201         output = np.array(data, dtype=ddtype)
+   2202         if usemask:
+   2203             outputmask = np.array(masks, dtype=mdtype)
+
+ValueError: could not assign tuple of length 6 to structure with 1 fields.
+
+In [5]: !ls
+earthquakes.csv		parsed.csv		tsunamis.csv
+example_data.csv	quakes.db
+
+In [6]: data = np.genfromtxt(
+   ...:     'example_data.csv',
+   ...:     delimiter=';',
+   ...:     names=True,
+   ...:     dtype=None,
+   ...:     encoding='UTF'
+   ...: )
+
+In [7]: data
+Out[7]: 
+array([('2018-10-13 11:10:23.560', '262km NW of Ozernovskiy, Russia', 'mww', 6.7, 'green', 1),
+       ('2018-10-13 04:34:15.580', '25km E of Bitung, Indonesia', 'mww', 5.2, 'green', 0),
+       ('2018-10-13 00:13:46.220', '42km WNW of Sola, Vanuatu', 'mww', 5.7, 'green', 0),
+       ('2018-10-12 21:09:49.240', '13km E of Nueva Concepcion, Guatemala', 'mww', 5.7, 'green', 0),
+       ('2018-10-12 02:52:03.620', '128km SE of Kimbe, Papua New Guinea', 'mww', 5.6, 'green', 1)],
+      dtype=[('time', '<U23'), ('place', '<U37'), ('magType', '<U3'), ('mag', '<f8'), ('alert', '<U5'), ('tsunami', '<i8')])
+
+In [8]: data.shape
+Out[8]: (5,)
+
+In [9]: %%timeit
+   ...: max([row[3] for row in data])
+   ...: 
+   ...: 
+
+
+1.69 µs ± 11.4 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+
+In [10]: 
+
+In [10]: 
+
+In [10]: %%timeit
+    ...: max([row[3] for row in data])
+    ...: 
+    ...: 
+1.7 µs ± 7.48 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+
+In [11]: max([row[3] for row in data])
+Out[11]: 6.7
+
+In [12]: max([row[5] for row in data])
+Out[12]: 1
+
+In [13]: max([row[0] for row in data])
+Out[13]: '2018-10-13 11:10:23.560'
+
+In [14]: array_dict = {}
+
+In [15]: for i, col in enumerate(data.dtype.names):
+    ...:     array_dict[col] = np.array([row[i] for row in data])
+    ...: 
+
+In [16]: array_dict
+Out[16]: 
+{'time': array(['2018-10-13 11:10:23.560', '2018-10-13 04:34:15.580',
+        '2018-10-13 00:13:46.220', '2018-10-12 21:09:49.240',
+        '2018-10-12 02:52:03.620'], dtype='<U23'),
+ 'place': array(['262km NW of Ozernovskiy, Russia', '25km E of Bitung, Indonesia',
+        '42km WNW of Sola, Vanuatu',
+        '13km E of Nueva Concepcion, Guatemala',
+        '128km SE of Kimbe, Papua New Guinea'], dtype='<U37'),
+ 'magType': array(['mww', 'mww', 'mww', 'mww', 'mww'], dtype='<U3'),
+ 'mag': array([6.7, 5.2, 5.7, 5.7, 5.6]),
+ 'alert': array(['green', 'green', 'green', 'green', 'green'], dtype='<U5'),
+ 'tsunami': array([1, 0, 0, 0, 1])}
+
+In [17]: array_dict.type
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-17-2b3096e952e7> in <module>
+----> 1 array_dict.type
+
+AttributeError: 'dict' object has no attribute 'type'
+
+In [18]: type(array_dict)
+Out[18]: dict
+
+In [19]: array_dict['mag'].max()
+Out[19]: 6.7
+
+In [20]: array_dict['mag'].max()
+Out[20]: 6.7
+
+In [21]: %%time_it
+    ...: array_dict['mag'].max()
+    ...: 
+    ...: 
+UsageError: Cell magic `%%time_it` not found.
+
+In [22]: %%timeit
+    ...: array_dict['mag'].max()
+    ...: 
+    ...: 
+    ...: 
+
+638 ns ± 0.518 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+
+In [23]: 
+
+In [23]: np.array([
+    ...:     value[array_dict['mag'].argmax()] for key, value in array_dict.items()
+    ...:     ])
+Out[23]: 
+array(['2018-10-13 11:10:23.560', '262km NW of Ozernovskiy, Russia',
+       'mww', '6.7', 'green', '1'], dtype='<U32')
+
+In [24]: import pandas as pd
+
+In [25]: place = pd.Series(array_dict['place'], name='place')
+
+In [26]: place
+Out[26]: 
+0          262km NW of Ozernovskiy, Russia
+1              25km E of Bitung, Indonesia
+2                42km WNW of Sola, Vanuatu
+3    13km E of Nueva Concepcion, Guatemala
+4      128km SE of Kimbe, Papua New Guinea
+Name: place, dtype: object
+
+In [27]: place.shape
+Out[27]: (5,)
+
+In [28]: place.name
+Out[28]: 'place'
+
+In [29]: place.dtype
+Out[29]: dtype('O')
+
+In [30]: place.index
+Out[30]: RangeIndex(start=0, stop=5, step=1)
+
+In [31]: place.values
+Out[31]: 
+array(['262km NW of Ozernovskiy, Russia', '25km E of Bitung, Indonesia',
+       '42km WNW of Sola, Vanuatu',
+       '13km E of Nueva Concepcion, Guatemala',
+       '128km SE of Kimbe, Papua New Guinea'], dtype=object)
+
+In [32]: place_index = place.index
+
+In [33]: place_index
+Out[33]: RangeIndex(start=0, stop=5, step=1)
+
+In [34]: place_index.values
+Out[34]: array([0, 1, 2, 3, 4])
+
+In [35]: place_index.is_unique
+Out[35]: True
+
+In [36]: place_index.shape
+Out[36]: (5,)
+
+In [37]: place_index.dtype
+Out[37]: dtype('int64')
+
+In [38]: place_index.name
+
+
+
+
+
+
+
+In [39]: place_index
+Out[39]: RangeIndex(start=0, stop=5, step=1)
+
+In [40]: pd.Series(np.linespace(0, 10, num=5))\
+    ...: +
+  File "<ipython-input-40-f49aceef16e6>", line 2
+    +
+     ^
+SyntaxError: invalid syntax
+
+
+In [41]: pd.Series(np.linespace(0, 10, num=5))\
+    ...: +\
+    ...: pd.Series(np.linespace(0, 10, num=5), index=pd.Index([1, 2, 3, 4, 5]))
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-41-ed3581ec2008> in <module>
+----> 1 pd.Series(np.linespace(0, 10, num=5))\
+      2 +\
+      3 pd.Series(np.linespace(0, 10, num=5), index=pd.Index([1, 2, 3, 4, 5]))
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/numpy/__init__.py in __getattr__(attr)
+    311                 return Tester
+    312 
+--> 313             raise AttributeError("module {!r} has no attribute "
+    314                                  "{!r}".format(__name__, attr))
+    315 
+
+AttributeError: module 'numpy' has no attribute 'linespace'
+
+In [42]: pd.Series(np.linspace(0, 10, num=5))\
+    ...: +\
+    ...: pd.Series(np.linspace(0, 10, num=5), index=pd.Index([1, 2, 3, 4, 5]))
+Out[42]: 
+0     NaN
+1     2.5
+2     7.5
+3    12.5
+4    17.5
+5     NaN
+dtype: float64
+
+In [43]: df = pd.DataFrame(array_dict)
+
+In [44]: ddf
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-44-c646fef31c61> in <module>
+----> 1 ddf
+
+NameError: name 'ddf' is not defined
+
+In [45]: df
+Out[45]: 
+                      time                                  place magType  mag  alert  tsunami
+0  2018-10-13 11:10:23.560        262km NW of Ozernovskiy, Russia     mww  6.7  green        1
+1  2018-10-13 04:34:15.580            25km E of Bitung, Indonesia     mww  5.2  green        0
+2  2018-10-13 00:13:46.220              42km WNW of Sola, Vanuatu     mww  5.7  green        0
+3  2018-10-12 21:09:49.240  13km E of Nueva Concepcion, Guatemala     mww  5.7  green        0
+4  2018-10-12 02:52:03.620    128km SE of Kimbe, Papua New Guinea     mww  5.6  green        1
+
+In [46]: df.shape
+Out[46]: (5, 6)
+
+In [47]: df.dtype
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-47-b959c06452a1> in <module>
+----> 1 df.dtype
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/pandas/core/generic.py in __getattr__(self, name)
+   5485         ):
+   5486             return self[name]
+-> 5487         return object.__getattribute__(self, name)
+   5488 
+   5489     def __setattr__(self, name: str, value) -> None:
+
+AttributeError: 'DataFrame' object has no attribute 'dtype'
+
+In [48]: df.type
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-48-37b31d4b92d5> in <module>
+----> 1 df.type
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/pandas/core/generic.py in __getattr__(self, name)
+   5485         ):
+   5486             return self[name]
+-> 5487         return object.__getattribute__(self, name)
+   5488 
+   5489     def __setattr__(self, name: str, value) -> None:
+
+AttributeError: 'DataFrame' object has no attribute 'type'
+
+In [49]: df.dtype
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-49-b959c06452a1> in <module>
+----> 1 df.dtype
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/pandas/core/generic.py in __getattr__(self, name)
+   5485         ):
+   5486             return self[name]
+-> 5487         return object.__getattribute__(self, name)
+   5488 
+   5489     def __setattr__(self, name: str, value) -> None:
+
+AttributeError: 'DataFrame' object has no attribute 'dtype'
+
+
+In [50]: df
+Out[50]: 
+                      time                                  place magType  mag  alert  tsunami
+0  2018-10-13 11:10:23.560        262km NW of Ozernovskiy, Russia     mww  6.7  green        1
+1  2018-10-13 04:34:15.580            25km E of Bitung, Indonesia     mww  5.2  green        0
+2  2018-10-13 00:13:46.220              42km WNW of Sola, Vanuatu     mww  5.7  green        0
+3  2018-10-12 21:09:49.240  13km E of Nueva Concepcion, Guatemala     mww  5.7  green        0
+4  2018-10-12 02:52:03.620    128km SE of Kimbe, Papua New Guinea     mww  5.6  green        1
+
+In [51]: df['place']
+Out[51]: 
+0          262km NW of Ozernovskiy, Russia
+1              25km E of Bitung, Indonesia
+2                42km WNW of Sola, Vanuatu
+3    13km E of Nueva Concepcion, Guatemala
+4      128km SE of Kimbe, Papua New Guinea
+Name: place, dtype: object
+
+In [52]: df['time']
+Out[52]: 
+0    2018-10-13 11:10:23.560
+1    2018-10-13 04:34:15.580
+2    2018-10-13 00:13:46.220
+3    2018-10-12 21:09:49.240
+4    2018-10-12 02:52:03.620
+Name: time, dtype: object
+
+
+In [53]: df.dtypes
+Out[53]: 
+time        object
+place       object
+magType     object
+mag        float64
+alert       object
+tsunami      int64
+dtype: object
+
+In [54]: df.values
+Out[54]: 
+array([['2018-10-13 11:10:23.560', '262km NW of Ozernovskiy, Russia',
+        'mww', 6.7, 'green', 1],
+       ['2018-10-13 04:34:15.580', '25km E of Bitung, Indonesia', 'mww',
+        5.2, 'green', 0],
+       ['2018-10-13 00:13:46.220', '42km WNW of Sola, Vanuatu', 'mww',
+        5.7, 'green', 0],
+       ['2018-10-12 21:09:49.240',
+        '13km E of Nueva Concepcion, Guatemala', 'mww', 5.7, 'green', 0],
+       ['2018-10-12 02:52:03.620', '128km SE of Kimbe, Papua New Guinea',
+        'mww', 5.6, 'green', 1]], dtype=object)
+
+In [55]: df.columns
+Out[55]: Index(['time', 'place', 'magType', 'mag', 'alert', 'tsunami'], dtype='object')
+
+In [56]: df.columns.values
+Out[56]: 
+array(['time', 'place', 'magType', 'mag', 'alert', 'tsunami'],
+      dtype=object)
+
+In [57]: df.columns.count
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-57-1f0a66e50ca1> in <module>
+----> 1 df.columns.count
+
+AttributeError: 'Index' object has no attribute 'count'
+
+In [58]: df.columns.shape
+Out[58]: (6,)
+
+In [59]: df.index
+Out[59]: RangeIndex(start=0, stop=5, step=1)
+
+In [60]: df.shape
+Out[60]: (5, 6)
+
+In [61]: df + df
+Out[61]: 
+                                             time  ... tsunami
+0  2018-10-13 11:10:23.5602018-10-13 11:10:23.560  ...       2
+1  2018-10-13 04:34:15.5802018-10-13 04:34:15.580  ...       0
+2  2018-10-13 00:13:46.2202018-10-13 00:13:46.220  ...       0
+3  2018-10-12 21:09:49.2402018-10-12 21:09:49.240  ...       0
+4  2018-10-12 02:52:03.6202018-10-12 02:52:03.620  ...       2
+
+[5 rows x 6 columns]
+
+In [62]: import datetime
+
+In [63]: import numpy as np
+
+In [64]: import pandas as pd
+
+In [65]: help(datetime)
+
+
+In [66]: help(pd)
+
+
+In [67]: help(pd.DataFrame)
+
+
+In [68]: ls
+earthquakes.csv   example_data.csv  parsed.csv        quakes.db         tsunamis.csv
+
+In [69]: ls
+earthquakes.csv   example_data.csv  parsed.csv        quakes.db         tsunamis.csv
+
+
+In [70]: help(pd.read_csv)
+
+
+In [71]: dir()
+Out[71]: 
+['In',
+ 'Out',
+ '_',
+ '_11',
+ '_12',
+ '_13',
+ '_16',
+ '_18',
+ '_19',
+ '_20',
+ '_23',
+ '_26',
+ '_27',
+ '_28',
+ '_29',
+ '_30',
+ '_31',
+ '_33',
+ '_34',
+ '_35',
+ '_36',
+ '_37',
+ '_39',
+ '_42',
+ '_45',
+ '_46',
+ '_50',
+ '_51',
+ '_52',
+ '_53',
+ '_54',
+ '_55',
+ '_56',
+ '_58',
+ '_59',
+ '_60',
+ '_61',
+ '_7',
+ '_8',
+ '__',
+ '___',
+ '__builtin__',
+ '__builtins__',
+ '__doc__',
+ '__loader__',
+ '__name__',
+ '__package__',
+ '__spec__',
+ '_dh',
+ '_exit_code',
+ '_i',
+ '_i1',
+ '_i10',
+ '_i11',
+ '_i12',
+ '_i13',
+ '_i14',
+ '_i15',
+ '_i16',
+ '_i17',
+ '_i18',
+ '_i19',
+ '_i2',
+ '_i20',
+ '_i21',
+ '_i22',
+ '_i23',
+ '_i24',
+ '_i25',
+ '_i26',
+ '_i27',
+ '_i28',
+ '_i29',
+ '_i3',
+ '_i30',
+ '_i31',
+ '_i32',
+ '_i33',
+ '_i34',
+ '_i35',
+ '_i36',
+ '_i37',
+ '_i38',
+ '_i39',
+ '_i4',
+ '_i40',
+ '_i41',
+ '_i42',
+ '_i43',
+ '_i44',
+ '_i45',
+ '_i46',
+ '_i47',
+ '_i48',
+ '_i49',
+ '_i5',
+ '_i50',
+ '_i51',
+ '_i52',
+ '_i53',
+ '_i54',
+ '_i55',
+ '_i56',
+ '_i57',
+ '_i58',
+ '_i59',
+ '_i6',
+ '_i60',
+ '_i61',
+ '_i62',
+ '_i63',
+ '_i64',
+ '_i65',
+ '_i66',
+ '_i67',
+ '_i68',
+ '_i69',
+ '_i7',
+ '_i70',
+ '_i71',
+ '_i8',
+ '_i9',
+ '_ih',
+ '_ii',
+ '_iii',
+ '_oh',
+ 'array_dict',
+ 'col',
+ 'data',
+ 'datetime',
+ 'df',
+ 'exit',
+ 'get_ipython',
+ 'i',
+ 'np',
+ 'pd',
+ 'place',
+ 'place_index',
+ 'quit']
+
+In [72]: help(dir)
+
+
+In [73]: place.__dict__
+Out[73]: 
+{'_is_copy': None,
+ '_mgr': SingleBlockManager
+ Items: RangeIndex(start=0, stop=5, step=1)
+ ObjectBlock: 5 dtype: object,
+ '_item_cache': {},
+ '_attrs': {},
+ '_flags': <Flags(allows_duplicate_labels=True)>,
+ '_name': 'place',
+ '_index': RangeIndex(start=0, stop=5, step=1)}
+
+In [74]: place_index.__dict__
+Out[74]: 
+{'_range': range(0, 5),
+ '_name': None,
+ '_cache': {'_data': array([0, 1, 2, 3, 4])},
+ '_id': <object at 0x122b60450>}
+
+In [75]: pd.read_csv?
+
+In [76]: dir?
+Docstring:
+dir([object]) -> list of strings
+
+If called without an argument, return the names in the current scope.
+Else, return an alphabetized list of names comprising (some of) the attributes
+of the given object, and of attributes reachable from it.
+If the object supplies a method named __dir__, it will be used; otherwise
+the default dir() logic is used and returns:
+  for a module object: the module's attributes.
+  for a class object:  its attributes, and recursively the attributes
+    of its bases.
+  for any other object: its attributes, its class's attributes, and
+    recursively the attributes of its class's base classes.
+Type:      builtin_function_or_method
+
+In [77]: pd.read_csv??
+
+In [78]: np.random.seed(0)
+
+In [79]: pd.Series(np.random.rand(5), name='random')
+Out[79]: 
+0    0.548814
+1    0.715189
+2    0.602763
+3    0.544883
+4    0.423655
+Name: random, dtype: float64
+
+In [80]: pd.Series(np.random.normal(), name='random normal')
+Out[80]: 
+0   -0.842724
+Name: random normal, dtype: float64
+
+In [81]: pd.Series(np.random.normal(20), name='random normal')
+Out[81]: 
+0    21.969924
+Name: random normal, dtype: float64
+
+In [82]: pd.Series(np.random.normal(0, 20), name='random normal')
+Out[82]: 
+0    25.322371
+Name: random normal, dtype: float64
+
+In [83]: np.random.normal?
+
+In [84]: pd.Series(np.random.normal(0, 0.1, 20), name='random normal')
+Out[84]: 
+0    -0.050588
+1     0.254520
+2     0.108081
+3     0.048431
+4     0.057914
+5    -0.018158
+6     0.141020
+7    -0.037447
+8     0.027520
+9    -0.096075
+10    0.037693
+11    0.003344
+12    0.068057
+13   -0.156350
+14   -0.056670
+15   -0.024215
+16    0.151439
+17   -0.033306
+18    0.004736
+19    0.146274
+Name: random normal, dtype: float64
+
+In [85]: dir()
+Out[85]: 
+['In',
+ 'Out',
+ '_',
+ '_11',
+ '_12',
+ '_13',
+ '_16',
+ '_18',
+ '_19',
+ '_20',
+ '_23',
+ '_26',
+ '_27',
+ '_28',
+ '_29',
+ '_30',
+ '_31',
+ '_33',
+ '_34',
+ '_35',
+ '_36',
+ '_37',
+ '_39',
+ '_42',
+ '_45',
+ '_46',
+ '_50',
+ '_51',
+ '_52',
+ '_53',
+ '_54',
+ '_55',
+ '_56',
+ '_58',
+ '_59',
+ '_60',
+ '_61',
+ '_7',
+ '_71',
+ '_73',
+ '_74',
+ '_79',
+ '_8',
+ '_80',
+ '_81',
+ '_82',
+ '_84',
+ '__',
+ '___',
+ '__builtin__',
+ '__builtins__',
+ '__doc__',
+ '__loader__',
+ '__name__',
+ '__package__',
+ '__spec__',
+ '_dh',
+ '_exit_code',
+ '_i',
+ '_i1',
+ '_i10',
+ '_i11',
+ '_i12',
+ '_i13',
+ '_i14',
+ '_i15',
+ '_i16',
+ '_i17',
+ '_i18',
+ '_i19',
+ '_i2',
+ '_i20',
+ '_i21',
+ '_i22',
+ '_i23',
+ '_i24',
+ '_i25',
+ '_i26',
+ '_i27',
+ '_i28',
+ '_i29',
+ '_i3',
+ '_i30',
+ '_i31',
+ '_i32',
+ '_i33',
+ '_i34',
+ '_i35',
+ '_i36',
+ '_i37',
+ '_i38',
+ '_i39',
+ '_i4',
+ '_i40',
+ '_i41',
+ '_i42',
+ '_i43',
+ '_i44',
+ '_i45',
+ '_i46',
+ '_i47',
+ '_i48',
+ '_i49',
+ '_i5',
+ '_i50',
+ '_i51',
+ '_i52',
+ '_i53',
+ '_i54',
+ '_i55',
+ '_i56',
+ '_i57',
+ '_i58',
+ '_i59',
+ '_i6',
+ '_i60',
+ '_i61',
+ '_i62',
+ '_i63',
+ '_i64',
+ '_i65',
+ '_i66',
+ '_i67',
+ '_i68',
+ '_i69',
+ '_i7',
+ '_i70',
+ '_i71',
+ '_i72',
+ '_i73',
+ '_i74',
+ '_i75',
+ '_i76',
+ '_i77',
+ '_i78',
+ '_i79',
+ '_i8',
+ '_i80',
+ '_i81',
+ '_i82',
+ '_i83',
+ '_i84',
+ '_i85',
+ '_i9',
+ '_ih',
+ '_ii',
+ '_iii',
+ '_oh',
+ 'array_dict',
+ 'col',
+ 'data',
+ 'datetime',
+ 'df',
+ 'exit',
+ 'get_ipython',
+ 'i',
+ 'np',
+ 'pd',
+ 'place',
+ 'place_index',
+ 'quit']
+
+
+In [86]: np.random.seed(0)   # set seed to result is reproducible
+
+In [87]: pd.DataFrame(
+    ...:     {
+    ...:         'random': np.random.rand(5),
+    ...:         'text': ['hot', 'warm', 'cool', 'cold', None],
+    ...:         'truth': [np.random.choice([True, False]) for _ in range(5)]
+    ...:     },
+    ...:     index=pd.date_range(
+    ...:         end=datetime.date(2019, 4, 21),
+    ...:         freq='1D',
+    ...:         period=5,
+    ...:         name='date'
+    ...:     )
+    ...: )
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-87-78b89d44831d> in <module>
+      5         'truth': [np.random.choice([True, False]) for _ in range(5)]
+      6     },
+----> 7     index=pd.date_range(
+      8         end=datetime.date(2019, 4, 21),
+      9         freq='1D',
+
+/opt/homebrew/Caskroom/miniforge/base/envs/ml_env/lib/python3.9/site-packages/pandas/core/indexes/datetimes.py in date_range(start, end, periods, freq, tz, normalize, name, closed, **kwargs)
+   1095         freq = "D"
+   1096 
+-> 1097     dtarr = DatetimeArray._generate_range(
+   1098         start=start,
+   1099         end=end,
+
+TypeError: _generate_range() got an unexpected keyword argument 'period'
+
+In [88]: pd.DataFrame(
+    ...:     {
+    ...:         'random': np.random.rand(5),
+    ...:         'text': ['hot', 'warm', 'cool', 'cold', None],
+    ...:         'truth': [np.random.choice([True, False]) for _ in range(5)]
+    ...:     },
+    ...:     index=pd.date_range(
+    ...:         end=datetime.date(2019, 4, 21),
+    ...:         freq='1D',
+    ...:         periods=5,
+    ...:         name='date'
+    ...:     )
+    ...: )
+Out[88]: 
+              random  text  truth
+date                             
+2019-04-17  0.056713   hot  False
+2019-04-18  0.272656  warm  False
+2019-04-19  0.477665  cool  False
+2019-04-20  0.812169  cold  False
+2019-04-21  0.479977  None   True
+
+In [89]: pd.DataFrame([
+    ...:     {'mag': 5.2, 'place': 'Cali'},
+    ...:     {'mag': 1.2, 'place': 'Alaska'},
+    ...:     {'mag': 0.2, 'place': 'Cali'},
+    ...:     ])
+Out[89]: 
+   mag   place
+0  5.2    Cali
+1  1.2  Alaska
+2  0.2    Cali
+
+In [90]: list_of_tuples = [(n, n**2, n**3) for n in range(5)]
+
+In [91]: list_of_tuples
+Out[91]: [(0, 0, 0), (1, 1, 1), (2, 4, 8), (3, 9, 27), (4, 16, 64)]
+
+In [92]: pd.DataFrame(
+    ...:     list_of_tuples, columns=['n', 'n_squared', 'n_cubed']
+    ...:     )
+Out[92]: 
+   n  n_squared  n_cubed
+0  0          0        0
+1  1          1        1
+2  2          4        8
+3  3          9       27
+4  4         16       64
+
+In [93]: pd.DataFrame(
+    ...:     array([
+    ...:         [0, 0, 0],
+    ...:         [1, 1, 1],
+    ...:         [2, 4, 8],
+    ...:         [3, 9, 27],
+    ...:         [4, 16, 64]
+    ...:         ]), columns=['n', 'n_squared', 'n_cubed']
+    ...:         )
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-93-c8a28b15cf15> in <module>
+      1 pd.DataFrame(
+----> 2     array([
+      3         [0, 0, 0],
+      4         [1, 1, 1],
+      5         [2, 4, 8],
+
+NameError: name 'array' is not defined
+
+In [94]: pd.DataFrame(
+    ...:     np.array([
+    ...:         [0, 0, 0],
+    ...:         [1, 1, 1],
+    ...:         [2, 4, 8],
+    ...:         [3, 9, 27],
+    ...:         [4, 16, 64]
+    ...:         ]), columns=['n', 'n_squared', 'n_cubed']
+    ...:        )
+Out[94]: 
+   n  n_squared  n_cubed
+0  0          0        0
+1  1          1        1
+2  2          4        8
+3  3          9       27
+4  4         16       64
+
+In [95]: !wc -l earthquakes.csv
+    9333 earthquakes.csv
+
+In [96]: wc -l earthquakes.csv
+  File "<ipython-input-96-31af3ebd3513>", line 1
+    wc -l earthquakes.csv
+          ^
+SyntaxError: invalid syntax
+
+
+In [97]: !ls -lh data
+ls: data: No such file or directory
+
+In [98]: !ls -lh .
+total 13992
+-rw-r--r--  1 sega  staff   3.4M 18 Dec 01:52 earthquakes.csv
+-rw-r--r--  1 sega  staff   397B 18 Dec 01:52 example_data.csv
+-rw-r--r--  1 sega  staff   3.4M 18 Dec 01:52 parsed.csv
+-rw-r--r--  1 sega  staff    16K 18 Dec 01:52 quakes.db
+-rw-r--r--  1 sega  staff   6.6K 18 Dec 01:52 tsunamis.csv
+
+In [99]: !ls -lh . | grep earthquakes.csv
+-rw-r--r--  1 sega  staff   3.4M 18 Dec 01:52 earthquakes.csv
+
+In [100]: files = !ls -lh data
+
+In [101]: type(files)
+Out[101]: IPython.utils.text.SList
+
+In [102]: [file for file in files if 'earthquake' in file]
+Out[102]: []
+
+In [103]: files = !ls -lh .
+
+In [104]: [file for file in files if 'earthquake' in file]
+Out[104]: ['-rw-r--r--  1 sega  staff   3.4M 18 Dec 01:52 earthquakes.csv']
+
+In [105]: !head -n 3 ./earthquakes.csv
+alert,cdi,code,detail,dmin,felt,gap,ids,mag,magType,mmi,net,nst,place,rms,sig,sources,status,time,title,tsunami,type,types,tz,updated,url
+,,37389218,https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=ci37389218&format=geojson,0.008693,,85.0,",ci37389218,",1.35,ml,,ci,26.0,"9km NE of Aguanga, CA",0.19,28,",ci,",automatic,1539475168010,"M 1.4 - 9km NE of Aguanga, CA",0,earthquake,",geoserve,nearby-cities,origin,phase-data,",-480.0,1539475395144,https://earthquake.usgs.gov/earthquakes/eventpage/ci37389218
+,,37389202,https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=ci37389202&format=geojson,0.02003,,79.0,",ci37389202,",1.29,ml,,ci,20.0,"9km NE of Aguanga, CA",0.29,26,",ci,",automatic,1539475129610,"M 1.3 - 9km NE of Aguanga, CA",0,earthquake,",geoserve,nearby-cities,origin,phase-data,",-480.0,1539475253925,https://earthquake.usgs.gov/earthquakes/eventpage/ci37389202
+
+In [106]: !head -n 2 ./earthquakes.csv
+alert,cdi,code,detail,dmin,felt,gap,ids,mag,magType,mmi,net,nst,place,rms,sig,sources,status,time,title,tsunami,type,types,tz,updated,url
+,,37389218,https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=ci37389218&format=geojson,0.008693,,85.0,",ci37389218,",1.35,ml,,ci,26.0,"9km NE of Aguanga, CA",0.19,28,",ci,",automatic,1539475168010,"M 1.4 - 9km NE of Aguanga, CA",0,earthquake,",geoserve,nearby-cities,origin,phase-data,",-480.0,1539475395144,https://earthquake.usgs.gov/earthquakes/eventpage/ci37389218
+
+In [107]: !tail -n 2 ./earthquakes.csv
+,,38063959,https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=ci38063959&format=geojson,0.01865,,61.0,",ci38063959,",1.1,ml,,ci,27.0,"9km NE of Aguanga, CA",0.1,19,",ci,",reviewed,1537229545350,"M 1.1 - 9km NE of Aguanga, CA",0,earthquake,",focal-mechanism,geoserve,nearby-cities,origin,phase-data,scitech-link,",-480.0,1537230211640,https://earthquake.usgs.gov/earthquakes/eventpage/ci38063959
+,,38063935,https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=ci38063935&format=geojson,0.01698,,39.0,",ci38063935,",0.66,ml,,ci,24.0,"9km NE of Aguanga, CA",0.1,7,",ci,",reviewed,1537228864470,"M 0.7 - 9km NE of Aguanga, CA",0,earthquake,",focal-mechanism,geoserve,nearby-cities,origin,phase-data,scitech-link,",-480.0,1537305830770,https://earthquake.usgs.gov/earthquakes/eventpage/ci38063935
+
+In [108]: !awk -F',' '{print NF; exit}' ./earthquakes.csv
+26
+
+In [109]: headers = !head -n 1 ./earthquakes.csv
+
+In [110]: len(headers[0].split(','))
+Out[110]: 26
+
+In [111]: headers
+Out[111]: ['alert,cdi,code,detail,dmin,felt,gap,ids,mag,magType,mmi,net,nst,place,rms,sig,sources,status,time,title,tsunami,type,types,tz,updated,url']
+
+In [112]: df = pd.read_csv('earthquakes.csv')
+
+In [113]: df.head()
+Out[113]: 
+  alert  cdi      code  ...     tz        updated                                                url
+0   NaN  NaN  37389218  ... -480.0  1539475395144  https://earthquake.usgs.gov/earthquakes/eventp...
+1   NaN  NaN  37389202  ... -480.0  1539475253925  https://earthquake.usgs.gov/earthquakes/eventp...
+2   NaN  4.4  37389194  ... -480.0  1539536756176  https://earthquake.usgs.gov/earthquakes/eventp...
+3   NaN  NaN  37389186  ... -480.0  1539475196167  https://earthquake.usgs.gov/earthquakes/eventp...
+4   NaN  NaN  73096941  ... -480.0  1539477547926  https://earthquake.usgs.gov/earthquakes/eventp...
+
+[5 rows x 26 columns]
+
+In [114]: df.head
+Out[114]: 
+<bound method NDFrame.head of      alert  cdi        code  ...     tz        updated                                                url
+0      NaN  NaN    37389218  ... -480.0  1539475395144  https://earthquake.usgs.gov/earthquakes/eventp...
+1      NaN  NaN    37389202  ... -480.0  1539475253925  https://earthquake.usgs.gov/earthquakes/eventp...
+2      NaN  4.4    37389194  ... -480.0  1539536756176  https://earthquake.usgs.gov/earthquakes/eventp...
+3      NaN  NaN    37389186  ... -480.0  1539475196167  https://earthquake.usgs.gov/earthquakes/eventp...
+4      NaN  NaN    73096941  ... -480.0  1539477547926  https://earthquake.usgs.gov/earthquakes/eventp...
+...    ...  ...         ...  ...    ...            ...                                                ...
+9327   NaN  NaN    73086771  ... -480.0  1537285598315  https://earthquake.usgs.gov/earthquakes/eventp...
+9328   NaN  NaN    38063967  ... -480.0  1537276800970  https://earthquake.usgs.gov/earthquakes/eventp...
+9329   NaN  NaN  2018261000  ... -240.0  1537243777410  https://earthquake.usgs.gov/earthquakes/eventp...
+9330   NaN  NaN    38063959  ... -480.0  1537230211640  https://earthquake.usgs.gov/earthquakes/eventp...
+9331   NaN  NaN    38063935  ... -480.0  1537305830770  https://earthquake.usgs.gov/earthquakes/eventp...
+
+[9332 rows x 26 columns]>
+
+In [115]: df.head()
+Out[115]: 
+  alert  cdi      code  ...     tz        updated                                                url
+0   NaN  NaN  37389218  ... -480.0  1539475395144  https://earthquake.usgs.gov/earthquakes/eventp...
+1   NaN  NaN  37389202  ... -480.0  1539475253925  https://earthquake.usgs.gov/earthquakes/eventp...
+2   NaN  4.4  37389194  ... -480.0  1539536756176  https://earthquake.usgs.gov/earthquakes/eventp...
+3   NaN  NaN  37389186  ... -480.0  1539475196167  https://earthquake.usgs.gov/earthquakes/eventp...
+4   NaN  NaN  73096941  ... -480.0  1539477547926  https://earthquake.usgs.gov/earthquakes/eventp...
+
+[5 rows x 26 columns]
+
+In [116]: df.shape
+Out[116]: (9332, 26)
+
+In [117]: df.to_csv('output.csv', index=False)
+
+In [118]: ls
+earthquakes.csv   example_data.csv  output.csv        parsed.csv        quakes.db         tsunamis.csv
+
+In [119]: !ls -lh
+total 20864
+-rw-r--r--  1 sega  staff   3.4M 18 Dec 01:52 earthquakes.csv
+-rw-r--r--  1 sega  staff   397B 18 Dec 01:52 example_data.csv
+-rw-r--r--  1 sega  staff   3.4M 18 Dec 04:11 output.csv
+-rw-r--r--  1 sega  staff   3.4M 18 Dec 01:52 parsed.csv
+-rw-r--r--  1 sega  staff    16K 18 Dec 01:52 quakes.db
+-rw-r--r--  1 sega  staff   6.6K 18 Dec 01:52 tsunamis.csv
+
+In [120]: import sqlite3
+
+In [121]: with sqlite3.connect('quakes.db') as connection:
+     ...:     pd.read_csv('tsunamis.csv').to_sql(
+     ...:         'tsunamis',
+     ...:         connection,
+     ...:         index=False,
+     ...:         if_exists='replace'
+     ...:         )
+     ...: 
+
+In [122]: ls
+earthquakes.csv   example_data.csv  output.csv        parsed.csv        quakes.db         tsunamis.csv
+
+In [123]: with sqlite3.connect('quakes.db') as connection:
+     ...:     tsunamis = pd.read_sql('SELECT * FROM tsunamis', connection)
+     ...: 
+
+In [124]: tsunamis.head()
+Out[124]: 
+   alert        type                                              title  ... magType  mag           time
+0   None  earthquake  M 5.0 - 165km NNW of Flying Fish Cove, Christm...  ...     mww  5.0  1539459504090
+1  green  earthquake            M 6.7 - 262km NW of Ozernovskiy, Russia  ...     mww  6.7  1539429023560
+2  green  earthquake        M 5.6 - 128km SE of Kimbe, Papua New Guinea  ...     mww  5.6  1539312723620
+3  green  earthquake         M 6.5 - 148km S of Severo-Kuril'sk, Russia  ...     mww  6.5  1539213362130
+4  green  earthquake        M 6.2 - 94km SW of Kokopo, Papua New Guinea  ...     mww  6.2  1539208835130
+
+[5 rows x 7 columns]
+
+In [125]: tsunamis.shape
+Out[125]: (61, 7)
+
+In [126]: tsunamis.columns
+Out[126]: Index(['alert', 'type', 'title', 'place', 'magType', 'mag', 'time'], dtype='object')
+
+In [127]: 
